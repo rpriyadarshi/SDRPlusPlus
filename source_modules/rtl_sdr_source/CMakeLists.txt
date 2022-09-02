@@ -7,7 +7,7 @@ add_library(rtl_sdr_source SHARED ${SRC})
 target_link_libraries(rtl_sdr_source PRIVATE sdrpp_core)
 set_target_properties(rtl_sdr_source PROPERTIES PREFIX "")
 
-target_include_directories(rtl_sdr_source PRIVATE "src/")
+target_include_directories(rtl_sdr_source PRIVATE "src/" "../../misc_modules/gpio/src")
 
 if (MSVC)
     target_compile_options(rtl_sdr_source PRIVATE /O2 /Ob2 /std:c++17 /EHsc)
