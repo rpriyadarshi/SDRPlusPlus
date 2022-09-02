@@ -7,7 +7,7 @@ add_library(airspyhf_source SHARED ${SRC})
 target_link_libraries(airspyhf_source PRIVATE sdrpp_core)
 set_target_properties(airspyhf_source PROPERTIES PREFIX "")
 
-target_include_directories(airspyhf_source PRIVATE "src/")
+target_include_directories(airspyhf_source PRIVATE "src/" "../../misc_modules/gpio/src")
 
 if (MSVC)
     target_compile_options(airspyhf_source PRIVATE /O2 /Ob2 /std:c++17 /EHsc)
