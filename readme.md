@@ -305,6 +305,19 @@ To install SDR++, run the following command in your ``build`` folder:
 ```sh
 sudo make install
 ```
+# Using cmake for entire build process (Enabling GPIO as an example)
+
+### Release build
+cmake -DCMAKE_BUILD_TYPE=Release -DOPT_BUILD_GPIO=ON ..
+cmake --build . --config Release -j 4 -- 
+sudo cmake --build . --config Release --target install --
+sudo cmake --build . --config Release --target uninstall --
+
+# Debug build
+cmake -DCMAKE_BUILD_TYPE=Debug -DOPT_BUILD_GPIO=ON ..
+cmake --build . --config Debug -j 4 -- 
+sudo cmake --build . --config Debug --target install --
+sudo cmake --build . --config Debug --target uninstall --
 
 # Module List
 
