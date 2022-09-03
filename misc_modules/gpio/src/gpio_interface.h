@@ -33,9 +33,6 @@ public:
     }
     void initialize() {
         _initialized = (gpioInitialise() < 0);
-        if (! _initialized) {
-            return;
-        }
     }
 
     void terminate() {
