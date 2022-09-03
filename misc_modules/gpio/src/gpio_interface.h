@@ -1,13 +1,14 @@
 #pragma once
 
-#include <pigpio.h>
+// #include <pigpio.h>
+#include <pigpiod_if2.h> // http://abyz.me.uk/rpi/pigpio/pdif2.html
 #include <module.h>
 // https://pinout.xyz/
 
 class GPIO_INFO {
 public:
     std::string name {"undefined"};
-    bool _initialized = false;
+    int deviceId = 0;
 
 private:
     GPIO_INFO() {}
@@ -31,20 +32,50 @@ public:
             }
         }
     }
-    void initialize() {
-        _initialized = (gpioInitialise() < 0);
+
+    void start(const char* addrStr, const char* portStr) {
+        // addrStr: specifies the host or IP address of the Pi running the
+        //         pigpio daemon.  It may be NULL in which case localhost
+        //         is used unless overridden by the PIGPIO_ADDR environment
+        //         variable.
+
+        // portStr: specifies the port address used by the Pi running the
+        //         pigpio daemon.  It may be NULL in which case "8888"
+        //         is used unless overridden by the PIGPIO_PORT environment
+        //         variable.
+        deviceId = pigpio_start(addrStr, portStr);
     }
 
-    void terminate() {
-        gpioTerminate();
+    void stop() {
+        // pi: >=0 (as returned by pigpio_start).
+        pigpio_stop(deviceId);
+    }
+
+    int getMode(unsigned int gpio) {
+        // pi: >=0 (as returned by pigpio_start).
+        // gpio: 0-53.
+        return get_mode(deviceId, gpio);
     }
 
     int setMode(unsigned int gpio, const unsigned int mode) {
-        return gpioSetMode(gpio, mode);
+        // pi: >=0 (as returned by pigpio_start).
+        // gpio: 0-53.
+        // mode: PI_INPUT, PI_OUTPUT, PI_ALT0, PI_ALT1,
+        //     PI_ALT2, PI_ALT3, PI_ALT4, PI_ALT5.
+        return set_mode(deviceId, gpio, mode);
+    }
+
+    int read(unsigned int gpio) {
+        // pi: >=0 (as returned by pigpio_start).
+        // gpio:0-53.
+        return gpio_read(deviceId, gpio);
     }
 
     int write(unsigned int gpio, unsigned int level) {
-        return gpioWrite(gpio, level);
+        // pi: >=0 (as returned by pigpio_start).
+        // gpio: 0-53.
+        // level: 0, 1.
+        return gpio_write(deviceId, gpio, level);
     }
 
     bool callInterface(const std::string& name, int code) {
