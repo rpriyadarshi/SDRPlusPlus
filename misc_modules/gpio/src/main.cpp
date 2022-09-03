@@ -20,14 +20,18 @@ public:
         this->name = name;
         gui::menu.registerEntry(name, menuHandler, this, NULL);
         core::modComManager.registerInterface("gpio", name, moduleInterfaceHandler, this);
+        GPIO_INFO::getInstance().start(nullptr, nullptr);
    }
 
     ~GpioModule() {
         gui::menu.removeEntry(name);
         core::modComManager.unregisterInterface(name);
+        GPIO_INFO::getInstance().stop();
     }
 
-    void postInit() {}
+    void postInit() {
+        GPIO_INFO::getInstance().setMode(pin, PI_OUTPUT);
+    }
 
     void enable() {
         enabled = true;
@@ -53,9 +57,11 @@ private:
         switch(code) {
         case GPIO_IFACE_CMD_START:
             spdlog::info("GPIO '[{0}->{1}]': Start!", _this->name, (*(std::string*)in));
+            GPIO_INFO::getInstance().write(_this->pin, 1);
             break;
         case GPIO_IFACE_CMD_STOP:
             spdlog::info("GPIO '[{0}->{1}]': Stop!", _this->name, (*(std::string*)in));
+            GPIO_INFO::getInstance().write(_this->pin, 0);
             break;
         }
     }
@@ -63,6 +69,7 @@ private:
     std::string name;
     bool enabled = true;
     std::mutex rpgpioMtx;
+    unsigned int pin = 18;
 };
 
 MOD_EXPORT void _INIT_() {
