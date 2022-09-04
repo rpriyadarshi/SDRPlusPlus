@@ -4,8 +4,10 @@ project(gpio)
 file(GLOB SRC "src/*.cpp")
 
 add_library(gpio SHARED ${SRC})
-target_link_libraries(gpio PRIVATE pigpiod_if2)
-target_link_libraries(gpio PRIVATE rt)
+if (__PIGPIO__)
+    target_link_libraries(gpio PRIVATE pigpiod_if2)
+    target_link_libraries(gpio PRIVATE rt)
+endif ()
 target_link_libraries(gpio PRIVATE sdrpp_core)
 set_target_properties(gpio PROPERTIES PREFIX "")
 

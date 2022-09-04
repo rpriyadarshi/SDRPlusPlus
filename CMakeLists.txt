@@ -65,7 +65,13 @@ option(OPT_BUILD_RIGCTL_CLIENT "Rigctl client to make SDR++ act as a panadapter"
 option(OPT_BUILD_RIGCTL_SERVER "Rigctl backend for controlling SDR++ with software like gpredict" ON)
 option(OPT_BUILD_SCANNER "Frequency scanner" ON)
 option(OPT_BUILD_SCHEDULER "Build the scheduler" OFF)
+option(OPT_BUILD_PIGPIO "Build the PIGPIO" OFF)
 option(OPT_BUILD_GPIO "Build the GPIO" OFF)
+
+if (OPT_BUILD_PIGPIO)
+add_compile_definitions(__PIGPIO__)
+set(OPT_BUILD_GPIO, "ON")
+endif (OPT_BUILD_PIGPIO)
 
 # Other options
 option(USE_INTERNAL_LIBCORRECT "Use an internal version of libcorrect" ON)
@@ -258,7 +264,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_custom_target(do_always ALL cp \"$<TARGET_FILE_DIR:sdrpp_core>/libsdrpp_core.dylib\" \"$<TARGET_FILE_DIR:sdrpp>\")
 endif ()
 
-# cmake .. "-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" -DOPT_BUILD_BLADERF_SOURCE=ON -DOPT_BUILD_LIMESDR_SOURCE=ON -DOPT_BUILD_SDRPLAY_SOURCE=ON -DOPT_BUILD_M17_DECODER=ON -DOPT_BUILD_SCANNER=ON -DOPT_BUILD_SCHEDULER=ON  -DOPT_BUILD_USRP_SOURCE=ON -DOPT_BUILD_GPIO=ON
+# cmake .. "-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" -DOPT_BUILD_BLADERF_SOURCE=ON -DOPT_BUILD_LIMESDR_SOURCE=ON -DOPT_BUILD_SDRPLAY_SOURCE=ON -DOPT_BUILD_M17_DECODER=ON -DOPT_BUILD_SCANNER=ON -DOPT_BUILD_SCHEDULER=ON  -DOPT_BUILD_USRP_SOURCE=ON -DOPT_BUILD_GPIO=ON -DOPT_BUILD_PIGPIO=ON
 
 # Install directives
 install(TARGETS sdrpp DESTINATION bin)

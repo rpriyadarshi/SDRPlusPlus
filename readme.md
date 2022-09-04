@@ -414,6 +414,10 @@ If you also have the SoapySDR module loaded (not necessarily enabled), this is a
 The solution until a fixed libhackrf version is released is to completely remove the soapy_source module from SDR++. To do this, delete `modules/soapy_source.dll` on windows
 or `/usr/lib/sdrpp/plugins/soapy_source.so` on linux.
 
+## Avahi daemon problem
+sudo service dbus start
+sudo service avahi-daemon start
+avahi-browse -a
 ## Issue not listed here?
 
 If you still have an issue, please open an issue about it or ask on the discord. I'll try to respond as quickly as I can. Please avoid trying to contact me on every platform imaginable thinking I'll respond faster though...
