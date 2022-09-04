@@ -55,12 +55,12 @@ private:
         GpioModule* _this = (GpioModule*)ctx;
         std::lock_guard lck(_this->rpgpioMtx);
         switch(code) {
-        case GPIO_IFACE_CMD_START:
-            spdlog::info("GPIO '[{0}->{1}]': Start!", _this->name, (*(std::string*)in));
+        case GPIO_INFO::KEY_0:
+            spdlog::info("GPIO '[{0}->{1}]': KEY_0!", _this->name, (*(std::string*)in));
             GPIO_INFO::getInstance().write(_this->pin, 1);
             break;
-        case GPIO_IFACE_CMD_STOP:
-            spdlog::info("GPIO '[{0}->{1}]': Stop!", _this->name, (*(std::string*)in));
+        case GPIO_INFO::KEY_1:
+            spdlog::info("GPIO '[{0}->{1}]': KEY_1!", _this->name, (*(std::string*)in));
             GPIO_INFO::getInstance().write(_this->pin, 0);
             break;
         }

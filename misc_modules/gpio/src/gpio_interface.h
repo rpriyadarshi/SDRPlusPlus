@@ -1,11 +1,34 @@
 #pragma once
 
-// #include <pigpio.h>
-#include <pigpiod_if2.h> // http://abyz.me.uk/rpi/pigpio/pdif2.html
 #include <module.h>
+
+#if defined (__PIGPIO__)
 // https://pinout.xyz/
+// http://abyz.me.uk/rpi/pigpio/pdif2.html
+#include <pigpiod_if2.h>
+#else
+#define PI_INPUT 0
+#define PI_OUTPUT 1
+#define PI_ALT0 2
+#define PI_ALT1 3
+#define PI_ALT2 4
+#define PI_ALT3 5
+#define PI_ALT4 6
+#define PI_ALT5 7
+inline int pigpio_start(const char* addrStr, const char* portStr) { return -1; }
+inline void pigpio_stop(int pi) {}
+inline int get_mode(int pi, unsigned int gpio) { return -1; }
+inline int set_mode(int pi, unsigned int gpio, const unsigned int mode) { return -1; }
+inline int gpio_read(int pi, unsigned int gpio) { return -1; }
+inline int gpio_write(int pi, unsigned int gpio, unsigned int level) { return -1; }
+#endif
 
 class GPIO_INFO {
+public:
+    enum KEYS {
+        KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9
+    };
+
 public:
     std::string name {"undefined"};
     int deviceId = 0;
@@ -33,7 +56,7 @@ public:
         }
     }
 
-    void start(const char* addrStr, const char* portStr) {
+    int start(const char* addrStr, const char* portStr) {
         // addrStr: specifies the host or IP address of the Pi running the
         //         pigpio daemon.  It may be NULL in which case localhost
         //         is used unless overridden by the PIGPIO_ADDR environment
@@ -43,7 +66,7 @@ public:
         //         pigpio daemon.  It may be NULL in which case "8888"
         //         is used unless overridden by the PIGPIO_PORT environment
         //         variable.
-        deviceId = pigpio_start(addrStr, portStr);
+        return deviceId = pigpio_start(addrStr, portStr);
     }
 
     void stop() {
@@ -83,7 +106,3 @@ public:
     }
 };
 
-enum {
-    GPIO_IFACE_CMD_START,
-    GPIO_IFACE_CMD_STOP
-};

@@ -25,11 +25,6 @@ SDRPP_MOD_INFO{
 
 ConfigManager config;
 
-enum GPIO_KEYS{
-    KEY_0,
-    KEY_1
-};
-
 const double sampleRates[] = {
     250000,
     1024000,
@@ -323,7 +318,7 @@ private:
         _this->workerThread = std::thread(&RTLSDRSourceModule::worker, _this);
 
         _this->running = true;
-        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_KEYS::KEY_0);
+        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_INFO::KEY_0);
         spdlog::info("RTLSDRSourceModule '{0}': Start!", _this->name);
     }
 
@@ -336,7 +331,7 @@ private:
         if (_this->workerThread.joinable()) { _this->workerThread.join(); }
         _this->stream.clearWriteStop();
         rtlsdr_close(_this->openDev);
-        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_KEYS::KEY_1);
+        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_INFO::KEY_1);
         spdlog::info("RTLSDRSourceModule '{0}': Stop!", _this->name);
     }
 

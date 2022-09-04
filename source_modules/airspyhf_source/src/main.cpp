@@ -26,11 +26,6 @@ SDRPP_MOD_INFO{
 
 ConfigManager config;
 
-enum GPIO_KEYS{
-    KEY_0,
-    KEY_1
-};
-
 const char* AGG_MODES_STR = "Off\0Low\0High\0";
 
 class AirspyHFSourceModule : public ModuleManager::Instance {
@@ -273,7 +268,7 @@ private:
         airspyhf_start(_this->openDev, callback, _this);
 
         _this->running = true;
-        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_KEYS::KEY_0);
+        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_INFO::KEY_0);
         spdlog::info("AirspyHFSourceModule '{0}': Start!", _this->name);
     }
 
@@ -284,7 +279,7 @@ private:
         _this->stream.stopWriter();
         airspyhf_close(_this->openDev);
         _this->stream.clearWriteStop();
-        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_KEYS::KEY_1);
+        GPIO_INFO::getInstance().callInterface(_this->name, GPIO_INFO::KEY_1);
         spdlog::info("AirspyHFSourceModule '{0}': Stop!", _this->name);
     }
 
