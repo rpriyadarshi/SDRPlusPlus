@@ -1,0 +1,209 @@
+{
+    "bandColors": {
+        "amateur": "#FF0000FF",
+        "aviation": "#00FF00FF",
+        "broadcast": "#0000FFFF",
+        "marine": "#00FFFFFF",
+        "military": "#FFFF00FF"
+    },
+    "bandPlan": "General",
+    "bandPlanEnabled": true,
+    "bandPlanPos": 0,
+    "centerTuning": false,
+    "colorMap": "Classic",
+    "decimationPower": 0,
+    "fastFFT": false,
+    "fftHeight": 300,
+    "fftHold": false,
+    "fftHoldSpeed": 60,
+    "fftRate": 20,
+    "fftSize": 65536,
+    "fftWindow": 2,
+    "frequency": 100000000.0,
+    "fullWaterfallUpdate": false,
+    "fullscreen": false,
+    "iqCorrection": false,
+    "lockMenuOrder": false,
+    "max": 0.0,
+    "maximized": false,
+    "menuElements": [
+        {
+            "name": "Source",
+            "open": true
+        },
+        {
+            "name": "Radio",
+            "open": false
+        },
+        {
+            "name": "Recorder",
+            "open": false
+        },
+        {
+            "name": "Frequency Manager",
+            "open": false
+        },
+        {
+            "name": "VFO Color",
+            "open": false
+        },
+        {
+            "name": "Scripting",
+            "open": false
+        },
+        {
+            "name": "Band Plan",
+            "open": false
+        },
+        {
+            "name": "Display",
+            "open": false
+        },
+        {
+            "name": "Sinks",
+            "open": false
+        },
+        {
+            "name": "Theme",
+            "open": false
+        },
+        {
+            "name": "Module Manager",
+            "open": true
+        },
+        {
+            "name": "Rigctl Server",
+            "open": false
+        },
+        {
+            "name": "Rohit",
+            "open": false
+        }
+    ],
+    "menuWidth": 300,
+    "min": -120.0,
+    "moduleInstances": {
+        "Airspy Source": {
+            "enabled": true,
+            "module": "airspy_source"
+        },
+        "AirspyHF+ Source": {
+            "enabled": true,
+            "module": "airspyhf_source"
+        },
+        "Audio Sink": {
+            "enabled": true,
+            "module": "audio_sink"
+        },
+        "File Source": {
+            "enabled": true,
+            "module": "file_source"
+        },
+        "Frequency Manager": {
+            "enabled": true,
+            "module": "frequency_manager"
+        },
+        "HackRF Source": {
+            "enabled": true,
+            "module": "hackrf_source"
+        },
+        "Network Sink": {
+            "enabled": true,
+            "module": "network_sink"
+        },
+        "PlutoSDR Source": {
+            "enabled": true,
+            "module": "plutosdr_source"
+        },
+        "RFspace Source": {
+            "enabled": true,
+            "module": "rfspace_source"
+        },
+        "RTL-SDR Source": {
+            "enabled": true,
+            "module": "rtl_sdr_source"
+        },
+        "RTL-TCP Source": {
+            "enabled": true,
+            "module": "rtl_tcp_source"
+        },
+        "Radio": {
+            "enabled": true,
+            "module": "radio"
+        },
+        "Recorder": {
+            "enabled": true,
+            "module": "recorder"
+        },
+        "Rigctl Server": {
+            "enabled": true,
+            "module": "rigctl_server"
+        },
+        "Rohit": {
+            "enabled": true,
+            "module": "gpio"
+        },
+        "SDR++ Server Source": {
+            "enabled": true,
+            "module": "sdrpp_server_source"
+        },
+        "SoapySDR Source": {
+            "enabled": true,
+            "module": "soapy_source"
+        },
+        "SpyServer Source": {
+            "enabled": true,
+            "module": "spyserver_source"
+        }
+    },
+    "modules": [
+        "../build/decoder_modules/meteor_demodulator/meteor_demodulator.so",
+        "../build/decoder_modules/radio/radio.so",
+        "../build/source_modules/plutosdr_source/plutosdr_source.so",
+        "../build/source_modules/airspyhf_source/airspyhf_source.so",
+        "../build/source_modules/rfspace_source/rfspace_source.so",
+        "../build/source_modules/rtl_sdr_source/rtl_sdr_source.so",
+        "../build/source_modules/soapy_source/soapy_source.so",
+        "../build/source_modules/airspy_source/airspy_source.so",
+        "../build/source_modules/hackrf_source/hackrf_source.so",
+        "../build/source_modules/file_source/file_source.so",
+        "../build/source_modules/sdrpp_server_source/sdrpp_server_source.so",
+        "../build/source_modules/spyserver_source/spyserver_source.so",
+        "../build/source_modules/rtl_tcp_source/rtl_tcp_source.so",
+        "../build/core/libcorrect/lib/libcorrect.so",
+        "../build/misc_modules/scanner/scanner.so",
+        "../build/misc_modules/discord_integration/discord_integration.so",
+        "../build/misc_modules/recorder/recorder.so",
+        "../build/misc_modules/rigctl_server/rigctl_server.so",
+        "../build/misc_modules/gpio/gpio.so",
+        "../build/misc_modules/frequency_manager/frequency_manager.so",
+        "../build/sink_modules/audio_sink/audio_sink.so",
+        "../build/sink_modules/network_sink/network_sink.so"
+    ],
+    "modulesDirectory": "../root_dev/modules",
+    "offset": 0.0,
+    "offsetMode": 0,
+    "resourcesDirectory": "../root/res",
+    "showMenu": true,
+    "showWaterfall": true,
+    "source": "RTL-SDR",
+    "streams": {
+        "Radio": {
+            "muted": false,
+            "sink": "Audio",
+            "volume": 1.0
+        }
+    },
+    "theme": "Dark",
+    "uiScale": 1.0,
+    "vfoColors": {
+        "Radio": "#FFFFFF"
+    },
+    "vfoOffsets": {
+        "Radio": 2000.0
+    },
+    "windowSize": {
+        "h": 720,
+        "w": 1280
+    }
+}
